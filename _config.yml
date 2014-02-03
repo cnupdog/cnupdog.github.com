@@ -3,9 +3,9 @@
 # ----------------------- #
 
 url: http://cnupdog.github.io
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+title: 一亩田
+subtitle: 用来种代码的一亩田.
+author: cnupdog@gmail.com
 simple_search: http://google.com/search
 description:
 
@@ -69,8 +69,8 @@ github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user:
-twitter_tweet_button: true
+# twitter_user:
+# twitter_tweet_button: true
 
 # Google +1
 google_plus_one: false
