@@ -1,0 +1,165 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>WEB服务器初步了解 - 一亩三分田</title>
+	<meta name="author" content="cnupdog@gmail.com">
+
+	
+	<meta name="description" content="WEB服务器初步了解 WEB服务器主要作用两点：处理静态资源；将动态请求分发到后台应用服务器，充当桥梁。
+目前最流行的HTTP服务器主要有：Apche \ Nginx \ Lighttpd \ IIS(主要服务于ASP程序)。 工作需要，所以重点了解了一下Apche和Nginx及两者之间的优缺点 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="一亩三分田" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://cnupdog.github.io/blog/2014/02/03/webfu-wu-qi-chu-bu-liao-jie/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		document.write("<img src='http://www.gravatar.com/avatar/" + MD5("cnupdog@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+	</script>
+</div>
+<h1><a href="/">一亩三分田</a></h1>
+<p class="subtitle">撒下一粒种子,收获一片希望.</p>
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">主页 | Blog</a></li>
+  <li><a href="/blog/archives">文章归档 | Archives</a></li>
+  <li><a href="/aboutme">关于我 | About Me</a></li>
+</ul>
+2014 是最重要的一年，Fighting!
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">WEB服务器初步了解</h1>
+	<div class="entry-content" itemprop="articleBody"><pre><code>WEB服务器主要作用两点：处理静态资源；将动态请求分发到后台应用服务器，充当桥梁。
+目前最流行的HTTP服务器主要有：Apche \ Nginx \ Lighttpd \ IIS(主要服务于ASP程序)。 
+工作需要，所以重点了解了一下Apche和Nginx及两者之间的优缺点。
+</code></pre>
+
+<h2>Apche </h2>
+
+<blockquote><p>许可协议：Apache License 2.0<br/>
+官方地址：<a href="http://www.apache.org">http://www.apache.org</a></p></blockquote>
+
+<p>Apahce是世界使用排名第一的WEB服务器软件，最大的特点是有良好的跨平台性和安全性，名字取自&#8221;A patchy server&#8221;的读音，即充满补丁的服务器，作为自由软件，有成千上万人为它开发新功能，修复缺陷。</p>
+
+<h2>Nginx</h2>
+
+<blockquote><p>许可协议：BSD-like<br/>
+官方地址：<a href="http://www.nginx.net">http://www.nginx.net</a></p></blockquote>
+
+<p>Nginx是一个十分轻量级的服务器，读音&#8221;engine X&#8221;。它以事件驱动的方式编写，所以有非常好的性能，同时也是有高效的反向代理、负载均衡功能。它本身就是一个反向代理服务器，并且支持七层负载均衡。</p>
+
+<h2><strong><em>Apache</em></strong> VS <strong><em>Nginx</em></strong></h2>
+
+<p>其实对两者进行对比并不合适，Apahce更适合做后端服务器，处理功能请求；Nginx更适合做前端服务器，处理大量静态页面的请求。所以现在很多集群站，都是前端用Nginx抗并发，后端Apache处理请求。这里很随意的列举一些知识点，只是为了做备忘。</p>
+
+<ol>
+<li><p>对于处理万级并发连接请求，Nginx可能仅使用几M内存，而Apache可能要使用几百M的内存资源</p>
+
+<blockquote><p>Apache：Process-based Server，同步多进程模型，即一个连接对应一个进程</p>
+
+<p>Nginx：Asynchronous Server，异步多进程模型，即多个连接&#8217;万级别&#8217;可以对应一个进程。异步服务器是事件驱动，除了用户的并发请求只需要单一的或者几个线程。它处理请求是异步非阻塞，因此能保持低资源低消耗高性能。</p></blockquote></li>
+<li><p>Nginx处理动态请求是鸡肋，一般动态请求交由Apache完成，Nginx负责处理静态请求和反向代理</p>
+
+<blockquote><p>Apache: 通过mod_proxy实现反向代理，通过mod_cache实现缓存功能。</p></blockquote></li>
+<li><p>反向代理从传输上可以分为同步和异步两种模式，Apache使用的是同步，Nginx使用的是异步。所以Nginx可以减少后端连接数，和负担</p>
+
+<blockquote><p>同步模式（Apache的mod_proxy）：浏览器发起请求，而后请求会被立刻转到后台，于是浏览器和后台之间就建立了一个通道，在请求结束之前该通道是一直存在的。这样会加重后端服务器的负担</p>
+
+<p>异步模式（Nginx）：浏览器发起请求，将请求数据(header)先收到Nginx上，然后Nginx再将这个请求发到后端，后端处理完之后把数据返回到Nginx上，由Nginx将数据流发到浏览器。这样能令负载均衡器更有保障，在前面那种同步模式中，请求都是只有一次机会，如果某台后端服务器刚好挂了，那么请求就失败了。而异步模式的话，这个请求会被发送到其他的后端服务器。</p></blockquote></li>
+<li><p>稳定性：Apache发展历史悠久，功能上bug相对较少。Nginx采取分阶段资源分配技术，使得它的CPU和内存占用率非常低，并且支持热部署，能在不间断服务的情况下，对软件版本进行升级，从另外一个侧面显示其稳定性的一面。</p>
+
+<blockquote><p>对于那些没有活动的连接，比如10000个，它们对Nginx其实毫无影响，只占几M内存资源，所以类似DOS攻击对Nginx服务器毫无作用</p></blockquote></li>
+</ol>
+
+
+<p>&mdash;未完待补充&mdash;</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+	
+	
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - cnupdog@gmail.com -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
