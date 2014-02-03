@@ -4,7 +4,7 @@
   <title><![CDATA[一亩田]]></title>
   <link href="http://cnupdog.github.io/atom.xml" rel="self"/>
   <link href="http://cnupdog.github.io/"/>
-  <updated>2014-02-03T16:40:02+08:00</updated>
+  <updated>2014-02-03T16:45:43+08:00</updated>
   <id>http://cnupdog.github.io/</id>
   <author>
     <name><![CDATA[cnupdog@gmail.com]]></name>
@@ -12,5 +12,14 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[如何搭建octopress]]></title>
+    <link href="http://cnupdog.github.io/blog/2014/02/03/ru-he-da-jian-octopress/"/>
+    <updated>2014-02-03T16:45:19+08:00</updated>
+    <id>http://cnupdog.github.io/blog/2014/02/03/ru-he-da-jian-octopress</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
 </feed>
