@@ -4,7 +4,7 @@
   <title><![CDATA[一亩三分田]]></title>
   <link href="http://cnupdog.github.io/atom.xml" rel="self"/>
   <link href="http://cnupdog.github.io/"/>
-  <updated>2014-02-03T18:09:13+08:00</updated>
+  <updated>2014-02-03T18:19:02+08:00</updated>
   <id>http://cnupdog.github.io/</id>
   <author>
     <name><![CDATA[cnupdog@gmail.com]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[你好，杰克尔！]]></title>
+    <link href="http://cnupdog.github.io/blog/2014/02/03/ni-hao-%2Cjie-ke-er-%21/"/>
+    <updated>2014-02-03T18:17:21+08:00</updated>
+    <id>http://cnupdog.github.io/blog/2014/02/03/ni-hao-,jie-ke-er-!</id>
+    <content type="html"><![CDATA[<p>Jekyll(<code>发音/'dʒiːk əl/，"杰克尔"</code>)是一个静态站点生成器，它会根据网页源码生成静态文件。它提供了模板（推荐使用<a href="http://jekyllbootstrap.com">@Jekyllbootstrap</a>）、变量、插件等功能。</p>
+
+<p>  用Jekyll可以轻而易举的搭建出博客，尤其适合技术博客。你可别指望这把小匕首有WordPress那样的良好体验、强大功能，但它能为我们提供：</p>
+
+<ul>
+<li>理想的写作环境（使用<code>markdown</code>，不再忧虑排版，可专注写作）</li>
+<li>更好的代码管理（使用<code>git</code>，你将体验并且感受分布式代码管理的便捷）</li>
+<li>屌丝的搭建方式（使用<code>github</code>，可以省下虚拟主机和数据库服务，直接在其之上托管整个网站）</li>
+<li>全面的插件服务（使用<code>disqus</code>、<code>gravatar</code>、<code>highlightJS</code>等等）</li>
+</ul>
+
+
+<p>   下面是搭建本站参考的一些资料：</p>
+
+<ul>
+<li> <a href="http://www.v2ex.com/t/25779">Jekyll-bootstrap教程</a></li>
+<li> <a href="http://www.feimos.com/translation_markdown_the_ins_and_outs/">Markdown:输入与输出</a></li>
+<li> <a href="http://jiyeqian.github.com/2011/09/introduction-to-git/">GIT速查手册</a></li>
+<li> <a href="https://www.dnspod.cn/Support">DNSPod官方帮助中心</a></li>
+</ul>
+
+
+<p>   -EOF-</p>
+
+<p>:set paste</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[如何搭建octopress]]></title>
