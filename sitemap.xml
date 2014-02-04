@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+<<<<<<< HEAD
         <loc>http://cnupdog.github.io/blog/2014/02/03/ru-he-da-jian-octopress/</loc>
         <lastmod>2014-02-03T16:45:19+08:00</lastmod>
     </url>
@@ -11,6 +12,36 @@
     <url>
         <loc>http://cnupdog.github.io/</loc>
         <lastmod>2014-02-03T16:45:19+08:00</lastmod>
+=======
+        <loc>http://cnupdog.github.io/blog/2014/02/03/ni-hao-%2Cjie-ke-er-%21/</loc>
+        <lastmod>2014-02-03T18:22:55+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://cnupdog.github.io/blog/2014/02/03/kai-shi-shi-yong-django-1/</loc>
+        <lastmod>2014-02-03T18:37:39+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://cnupdog.github.io/blog/2014/02/03/linode-vpsda-jian-openvpn/</loc>
+        <lastmod>2014-02-03T18:40:09+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://cnupdog.github.io/blog/2014/02/03/webfu-wu-qi-chu-bu-liao-jie/</loc>
+        <lastmod>2014-02-03T18:42:29+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://cnupdog.github.io/blog/2014/02/03/javadiao-yong-wai-bu-cheng-xu-%2Czi-jin-cheng-zu-sai/
+        </loc>
+        <lastmod>2014-02-03T18:50:15+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://cnupdog.github.io/blog/archives/</loc>
+        <lastmod>2014-02-03T18:50:15+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://cnupdog.github.io/</loc>
+        <lastmod>2014-02-03T18:50:15+08:00</lastmod>
+>>>>>>> b04c5576d614aace28a0b58dde146a4db24a3db9
     </url>
     <url>
         <loc>http://cnupdog.github.io/robots.txt</loc>
