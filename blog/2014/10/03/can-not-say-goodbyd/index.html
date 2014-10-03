@@ -1,0 +1,214 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Linode VPS搭建OPENVPN - 一亩三分田</title>
+	<meta name="author" content="cnupdog@gmail.com">
+
+	
+	<meta name="description" content="Linode VPS搭建OPENVPN 一直想租台VPS，安装想要的OS，搭建Web服务器，也顺便搭建各种代理，上国内无法上的网站。查了一些资料，最终挑选了Linode提供的VPS（512M内存, 16GB硬盘, 200GB流量/月 = $19.95/月，最低配置） &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="一亩三分田" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://cnupdog.github.io/blog/2014/02/03/linode-vpsda-jian-openvpn/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		document.write("<img src='http://www.gravatar.com/avatar/" + MD5("cnupdog@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+	</script>
+</div>
+<h1><a href="/">一亩三分田</a></h1>
+<p class="subtitle">撒下一粒种子,收获一片希望.</p>
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">主页 | Blog</a></li>
+  <li><a href="/blog/archives">文章归档 | Archives</a></li>
+  <li><a href="/aboutme">关于我 | About Me</a></li>
+</ul>
+2014 是最重要的一年，Fighting!
+</nav>
+欢迎关注我的来往帐号<br>
+<div align="left"><img width="100" height="100" src="http://cnupdog.com/images/laiwang_card.jpg"></div>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Linode VPS搭建OPENVPN</h1>
+	<div class="entry-content" itemprop="articleBody"><p>一直想租台VPS，安装想要的OS，搭建Web服务器，也顺便搭建各种代理，上国内无法上的网站。查了一些资料，最终挑选了Linode提供的VPS（512M内存, 16GB硬盘, 200GB流量/月 = <strong>$19.95</strong>/月，最低配置）<br/>
+有同样需求却不知道如何挑选VPS主机商的朋友可以参照：<a href="http://www.zhihu.com/question/19904241">哪款海外 VPS 性价比高？</a></p>
+
+<h2>如何购买VPS</h2>
+
+<p>前人已经总结了：<a href="http://linode.ofeva.com/">Linode VPS使用和购买指南</a></p>
+
+<p>另外需要注意几点：<br/>
+1. <strong>如何续费？</strong>绑定信用卡会自己扣费。<br/>
+2. <strong>停止服务？</strong>在Linode面板中将所有Linode都Remove掉即可，会自动按照剩余时常退回到Linode帐号中（有任何问题都可以发送Ticket过去，一般2分钟即可获得答复）<br/>
+3. <strong>挑选机房？</strong>Linode提供6个机房，建议选择<strong>Fremont</strong>，不建议选择<del>Tokyo</del>，虽然是最新的机房，但大量中国的新用户涌入使用，延迟开始大了，另外还可能因为中日关系交恶而收到影响。<br/>
+4. <strong>OS选择？</strong>很奇怪现在大多人都选择安装Ubuntu当server OS，但我还是最终选择了更传统的CENTOS6，因为CentOS和RedHat Enterprise源码一样，RHEL每五年左右更新一次，稳定安全且使得我们几乎不用去考虑升级的问题，另外我非常喜欢用yum命令（下载、升级软件超级方便）。</p>
+
+<h2>通过OpenVPN部署VPN服务</h2>
+
+<p>这点Linode的官方Guides写的非常详细，可以直接参考<a href="http://library.linode.com/networking/openvpn">Secure Communications with OpenVPN on CentOS 6</a></p>
+
+<h3>步骤及说明</h3>
+
+<ol>
+<li>rpm -Uvh <a href="http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm">http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm</a></li>
+<li>yum update</li>
+<li>yum install openvpn</li>
+<li>cp -R /usr/share/openvpn/easy-rsa/ /etc/openvpn</li>
+<li>vim /etc/openvpn/easy-rsa/2.0/vars</li>
+<li>cd /etc/openvpn/easy-rsa/2.0/</li>
+<li>cp /etc/openvpn/easy-rsa/2.0/openssl-1.0.0.cnf openssl.cnf</li>
+<li>. /etc/openvpn/easy-rsa/2.0/vars</li>
+<li>. /etc/openvpn/easy-rsa/2.0/clean-all</li>
+<li>. /etc/openvpn/easy-rsa/2.0/build-ca</li>
+<li>. /etc/openvpn/easy-rsa/2.0/build-key-server server</li>
+<li>. /etc/openvpn/easy-rsa/2.0/build-key client-cnupdog</li>
+<li>. /etc/openvpn/easy-rsa/2.0/build-dh</li>
+<li>cd /etc/openvpn/easy-rsa/2.0/keys</li>
+<li>cp ca.crt ca.key dh1024.pem server.crt server.key /etc/openvpn</li>
+<li>cp /usr/share/doc/openvpn-2.2.2/sample-config-files/server.conf /etc/openvpn/</li>
+<li>vim /etc/openvpn/server.conf</li>
+<li>cp /usr/share/doc/openvpn-2.2.2/sample-config-files/client.conf ~/cnupdog-client.conf</li>
+<li>iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE</li>
+<li>vim /etc/sysctl.conf(修改为net.ipv4.ip_forward=1)</li>
+<li>sysctl -p</li>
+<li>vim /etc/rc.local</li>
+</ol>
+
+
+<h3>补充说明</h3>
+
+<p><strong>[Step 5]</strong>  服务端配置文件可以server.conf可以参考如下：</p>
+
+<pre><code>dev tun
+port 1194
+proto udp
+ca /etc/openvpn/ca.crt
+cert /etc/openvpn/server.crt
+key /etc/openvpn/server.key
+dh /etc/openvpn/dh1024.pem
+persist-key
+persist-tun
+server 10.8.0.0 255.255.255.0
+keepalive 20 120
+client-to-client
+comp-lzo
+ifconfig-pool-persist ipp.txt
+status /etc/openvpn/openvpn-status.log
+verb 3
+push "redirect-gateway def1"
+</code></pre>
+
+<p><strong>[Step 18]</strong>  客户端配置文件可以client.ovpn可以参考如下：</p>
+
+<pre><code>dev tun
+client
+proto udp
+persist-tun
+persist-key
+resolv-retry infinite
+mute-replay-warnings
+remote 192.81.129.40 1194
+ca ca.crt
+cert client-cnupdog.crt
+key client-cnupdog.key
+comp-lzo
+verb 3
+</code></pre>
+
+<p><strong>[Step 22]</strong>  修改追加内容到rc.local以保证每次重启机器规则能自动生效</p>
+
+<pre><code>openvpn --config /etc/openvpn/server.conf &gt; /dev/null 2&gt;&amp;1 &amp; 
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+</code></pre>
+
+<p>-EOF-</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+	
+	
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - cnupdog@gmail.com -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
